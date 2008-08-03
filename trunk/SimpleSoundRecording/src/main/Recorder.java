@@ -264,5 +264,11 @@ public class Recorder {
 
 	}
 
-	public static Visual visual;
+	public static Visual visual ;
+
+	public static Visual getVisual() {
+//		if(visual == null)
+//			visual = new Visual();
+		return visual;
+	}
 }

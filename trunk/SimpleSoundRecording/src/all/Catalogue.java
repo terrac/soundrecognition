@@ -25,6 +25,7 @@ import PatternMatch.BlockCompare;
 import PatternMatch.NameList;
 import PatternMatch.SoundBit;
 import PatternMatch.ITuple;
+import PatternMatch.Tuple;
 
 import com.sun.java.swing.plaf.windows.WindowsTreeUI.CollapsedIcon;
 import com.sun.org.apache.regexp.internal.recompile;
@@ -34,7 +35,7 @@ import compare.compareDots;
 
 public abstract class Catalogue {
 	public List<compare> compList = new ArrayList<compare>();
-
+	
 	public boolean accepted;
 	// List<bl> blist = new ArrayList<bl>();
 	// List<Integer> tdifList = new ArrayList<Integer>();
@@ -55,28 +56,29 @@ public abstract class Catalogue {
 
 			accepted = true;
 			List<ITuple<String>> contList = null;
+			List<ITuple<String>> guessList = new ArrayList<ITuple<String>>();
 			for (compare compare : compList) {
 				contList = compare.compare(name, clist, contList);
-				ITuple tup = null;
-				for (ITuple<String> tuple : contList) {
-					if (tuple.getValue().equals(new ITuple<String>(testname,0))) {
-						tup = tuple;
+				int b = buildDiffForTests(contList);
+				for (int i = 0; i < 3&& i < contList.size(); i++) {
+					ITuple<String> tuple = contList.get(i);
+					int a = guessList.indexOf(tuple);
+					if(a != -1){
+						guessList.get(a).in += i-1;
+					} else {
+						guessList.add(new ITuple(tuple.getValue(),i-1));
 					}
 				}
-				int b = -1;
-				if (tup != null) {
-					b = contList.indexOf(tup);
-				}
-				if (b == -1) {
-					b = 10;
-				}
-				if (!(b < 3 && accepted)) {
-					accepted = false;
-				}
-				diff += b;
-				printstuff(name, contList, b);
+				//printstuff(name, contList, b, compare);
+				
 			}
 
+			
+			
+			Collections.sort(guessList,Collections.reverseOrder());
+			diff = 0;
+			buildDiffForTests(guessList);
+			System.out.println(diff+" "+testname+" "+guessList);
 			// if (!Recorder.console) {
 			// System.out.println(testname);
 			// System.out.println(contList);
@@ -90,10 +92,32 @@ public abstract class Catalogue {
 		aftermatching();
 	}
 
-	protected void printstuff(String name, List<ITuple<String>> contList, int b) {
-		System.out.println(b + name + testname);
-		System.out.println(contList);
+	protected int buildDiffForTests(List<ITuple<String>> contList) {
+		ITuple tup = null;
+		for (ITuple<String> tuple : contList) {
+			if (tuple.getValue().equals(testname)) {
+				tup = tuple;
+			}
+		}
+		int b = -1;
+		if (tup != null) {
+			b = contList.indexOf(tup);
+		}
+		if (b == -1) {
+			b = 10;
+		}
 		
+		diff += b;
+		return b;
+	}
+
+	protected void printstuff(String name, List<ITuple<String>> contList,
+			int b, compare compare) {
+		if (name.equals("")) {
+			System.out.println(b + " " + testname);
+			System.out.println(compare.getClass().getSimpleName() + " "
+					+ contList);
+		}
 	}
 
 	public abstract void aftermatching();
@@ -101,9 +125,11 @@ public abstract class Catalogue {
 	public abstract void beforeMatching();
 
 	protected void visualstuff(String name, List<SoundBit> clist) {
+		if(Recorder.getVisual() == null)
+			return;
 		linecolor linecolor = refinery.addlist(clist, 0);
 		vheight += 1;
-		Recorder.visual.save(lastname + vheight);
+		Recorder.getVisual().save(lastname + vheight);
 		Recorder.visual.linecols.clear();
 		if (!lastname.equals(name) || name.equals("")) {
 

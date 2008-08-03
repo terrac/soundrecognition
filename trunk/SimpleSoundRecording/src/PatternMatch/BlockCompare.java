@@ -1,10 +1,11 @@
 package PatternMatch;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class BlockCompare {
+public class BlockCompare implements Serializable{
 
 	
 	

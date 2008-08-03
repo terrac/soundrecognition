@@ -26,8 +26,12 @@ import all.State;
 import build.IRun;
 import build.Run;
 
+import catalogues.StanCata;
+
 import com.sun.org.apache.bcel.internal.generic.LLOAD;
 import compare.compare;
+import compare.compareDots;
+import compare.comparePattern;
 
 public class TestPossiblePatterns extends Run {
 
@@ -53,27 +57,30 @@ public class TestPossiblePatterns extends Run {
 		List<Integer> lobelist = new ArrayList<Integer>();
 		try {
 			// Deserialize from a file
-			File file = new File("filename.ser");
+			
 			ObjectInputStream in = new ObjectInputStream(new FileInputStream(
 					"list.txt"));
 			// Deserialize the object
 			rlist = (List<IRun>) in.readObject();
 			in.close();
 
-		} catch (ClassNotFoundException e) {
-		} catch (IOException e) {
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 
-		for (IRun a : rlist) {
-			if (a.getCompare() != null)
-				comlist.add(a.getCompare());
-		}
+		comlist.add(new compareDots());
+//		comlist.add(new comparePattern());
+//		for (IRun a : rlist) {
+//			if (a.getCompare() != null)
+//				comlist.add(a.getCompare());
+//		}
 		int lowest = Integer.MAX_VALUE;
-		for (int i = 0; i < 200; i++) {
+		int total = 0;
+		for (int i = 0; i < 1; i++) {
 
 			State state = new State();
 
-			Catalogue catalogue = new BasicCatalogue();
+			Catalogue catalogue = new StanCata();
 			state.catalogue = catalogue;
 			catalogue.compList = comlist;
 			for (IRun a : rlist) {
@@ -83,14 +90,17 @@ public class TestPossiblePatterns extends Run {
 
 			TUtil.buildsoundfortests(recorder, state);
 			int todiff = 0;
-			runtests(recorder, state, todiff);
+			todiff = runtests(recorder, state);
 			if (todiff < lowest) {
 				lowest = todiff;
 
 			}
 
 			System.out.println(todiff);
+			total += todiff;
 		}
+		System.out.println(total);
+		System.exit(0);
 	}
 
 }
