@@ -35,7 +35,8 @@ public class Run {
 	}
 
 
-	public static int runtests(Recorder recorder, State state, int tdiff) {
+	public static int runtests(Recorder recorder, State state) {
+		 int tdiff = 0;
 		for (File a : new File("tsounds").listFiles()) {
 
 			state.catalogue.testname = TUtil.getname(a);

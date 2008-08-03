@@ -1,5 +1,6 @@
 package build;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +15,7 @@ import PatternMatch.SoundBit;
 import PatternMatch.Tuple;
 import all.State;
 
-public interface IRun {
+public interface IRun extends Serializable {
 
 	
 

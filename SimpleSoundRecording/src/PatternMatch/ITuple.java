@@ -1,6 +1,8 @@
 package PatternMatch;
 
-public class ITuple<V> implements Comparable<ITuple> {
+import java.io.Serializable;
+
+public class ITuple<V> implements Comparable<ITuple>, Serializable {
 	V val;
 	public int in;
 	public V getValue(){return val;}
@@ -13,11 +15,17 @@ public class ITuple<V> implements Comparable<ITuple> {
 	@Override
 	public boolean equals(Object obj) {
 		// TODO Auto-generated method stub
-		return val.equals(((ITuple<String>)obj).getValue());
+		if(getValue() == null)
+			return false;
+		return getValue().equals(((ITuple<String>)obj).getValue());
 	}
 	public ITuple(V a , int b){
 		val = a;
 		in = b;
+	}
+	public ITuple(ITuple<V> a){
+		val = a.val;
+		in = a.in;
 	}
 	public ITuple() {
 		// TODO Auto-generated constructor stub

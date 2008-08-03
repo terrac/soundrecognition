@@ -1,5 +1,6 @@
 package build;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,19 +16,20 @@ import main.BasicCatalogue;
 import main.Recorder;
 import main.TUtil;
 
-public class BlockCompareRun implements IRun{
+public class BlockCompareRun implements IRun, Serializable {
 	static final int top = 10;
-	
+
 	int bottom;
 	BlockCompare bc;
 	compareblock compare = new compareblock();
 	List<Integer> bclist = new ArrayList<Integer>();
+
 	public int execute(Recorder recorder) {
-		List<Integer> tbclist = new ArrayList<Integer>();	
+		List<Integer> tbclist = new ArrayList<Integer>();
 		int bestdiff = Integer.MAX_VALUE;
-	
+
 		bestdiff = Integer.MAX_VALUE;
-	
+
 		for (int w = 0; w < top; w++) {
 			bottom = w;
 			setup();
@@ -38,23 +40,22 @@ public class BlockCompareRun implements IRun{
 			state.catalogue.compList.add(new compareDots());
 			state.catalogue.compList.add(compare);
 			TUtil.buildsoundfortests(recorder, state);
-	
+
 			int tdiff = 0;
-			tdiff = Run.runtests(recorder, state, tdiff);
-	
+			tdiff = Run.runtests(recorder, state);
+
 			if (bestdiff > tdiff) {
 				bestdiff = tdiff;
 				bclist.add(w);
 			}
-	
+
 			bestdiff = Integer.MAX_VALUE;
 		}
 		return bestdiff;
 	}
 
-
 	public void setup() {
-		
+
 		for (int i = 0; i < bottom; i += 1) {
 			for (int j = 0; j < bottom; j += 1) {
 				final int c = i;
@@ -62,9 +63,12 @@ public class BlockCompareRun implements IRun{
 				compare.block.add(new Block() {
 					@Override
 					public boolean execute(List<SoundBit> a, BlockCompare x) {
-						z = (int) (c * x.height * .10 * (top-bottom));
-						y = (int) (b * x.length * .10 * (top-bottom));
+						z = (int) (c * x.height * .10 * (top - bottom));
+						y = (int) (b * x.length * .10 * (top - bottom));
 						if (a.size() <= c) {
+							return false;
+						}
+						if (a.size() <= z) {
 							return false;
 						}
 						boolean d = a.get(z).height == y;
@@ -75,18 +79,15 @@ public class BlockCompareRun implements IRun{
 		}
 	}
 
-
 	public void generateRandom() {
-		bottom = bclist.get((int) (Math.random()* bclist.size()));
+		bottom = bclist.get((int) (Math.random() * bclist.size()));
 	}
-
 
 	@Override
 	public compare.compare getCompare() {
 		// TODO Auto-generated method stub
 		return compare;
 	}
-
 
 	public void setup(State state) {
 	}

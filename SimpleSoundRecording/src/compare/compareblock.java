@@ -1,5 +1,6 @@
 package compare;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -9,7 +10,7 @@ import java.util.Map;
 
 import PatternMatch.*;
 
-public class compareblock implements compare	 {
+public class compareblock implements compare, Serializable	 {
 	public List<Block> block = new ArrayList<Block>();
 	Map<String, BlockCompare> bmap = new HashMap<String, BlockCompare>();
 	
@@ -64,7 +65,7 @@ public class compareblock implements compare	 {
 				d.add(tuple);
 	
 			}
-			Collections.sort(d);
+			Collections.sort(d,Collections.reverseOrder());
 
 			return d;
 		}

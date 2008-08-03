@@ -41,7 +41,7 @@ public class LengthBetweenSizeAvgRun implements IRun {
 				TUtil.buildsoundfortests(recorder, state);
 
 				int tdiff = 0;
-				tdiff = Run.runtests(recorder, state, tdiff);
+				tdiff = Run.runtests(recorder, state);
 
 				System.out.println(state.lblist + " " + state.salist + " "
 						+ tdiff);

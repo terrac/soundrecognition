@@ -61,9 +61,11 @@ public class BuildPossiblePatterns extends Run {
 	protected void run(Recorder recorder) {
 		
 		for (IRun a : lrun) {
-			if(a.execute(recorder) < 3000000){
+			//if(
+					a.execute(recorder);
+				//	< 3000000){
 				vrun.add(a);
-			}
+			//}
 		}
 		System.out.println(vrun);
 	}
