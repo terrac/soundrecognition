@@ -1,10 +1,17 @@
 package main;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -88,6 +95,64 @@ public class TUtil {
 			String name = TUtil.getname(a);
 			TUtil.runFile(recorder, state, a, name);
 
+		}
+	}
+	
+	static public Object deepCopy(Object oldObj) {
+		ObjectOutputStream oos = null;
+		ObjectInputStream ois = null;
+		try {
+			ByteArrayOutputStream bos = new ByteArrayOutputStream(); // A
+			oos = new ObjectOutputStream(bos); // B
+			// serialize and pass the object
+			oos.writeObject(oldObj); // C
+			oos.flush(); // D
+			ByteArrayInputStream bin = new ByteArrayInputStream(bos
+					.toByteArray()); // E
+			ois = new ObjectInputStream(bin); // F
+			// return the new object
+			return ois.readObject(); // G
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				oos.close();
+				ois.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+		return null;
+	}
+	
+	public static Object load(String string) {
+		try {
+			// Deserialize from a file
+			
+			
+			ObjectInputStream in = new ObjectInputStream(new FileInputStream(
+					string));
+			// Deserialize the object
+			Object a = in.readObject();
+			in.close();
+			return a;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	public static void save(Object bpp, String string) {
+		try {
+			// Serialize to a file
+			
+			ObjectOutput out = new ObjectOutputStream(new FileOutputStream(
+					string));
+			out.writeObject(bpp);
+			out.close();
+
+		} catch (IOException e) {
 		}
 	}
 }

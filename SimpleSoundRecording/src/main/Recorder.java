@@ -9,6 +9,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -22,10 +23,16 @@ import javax.sound.sampled.TargetDataLine;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JFrame;
 
+import build.IRun;
+
+import compare.compare;
+import compare.compareDots;
+import compare.comparePattern;
+
 import catalogues.StanCata;
 
+import all.Catalogue;
 import all.State;
-
 
 public class Recorder {
 
@@ -63,51 +70,33 @@ public class Recorder {
 	public AudioInputStream audioInputStream;
 
 	public static void main(String s[]) {
+		List<compare> comlist = new ArrayList();
+		List<IRun> rlist = new ArrayList();
+		Recorder recorder = new Recorder(true);
+		String string = "Recorder.txt";
+		rlist = (List<IRun>) TUtil.load(string);
 
-		Recorder recorder = new Recorder();
+		comlist.add(new compareDots());
+		comlist.add(new comparePattern());
+		for (IRun a : rlist) {
+			if (a.getCompare() != null)
+				comlist.add(a.getCompare());
+		}
 
 		State state = new State();
-		state.catalogue = new StanCata();
-		state.lblist.add(40);
-		state.salist.add(40);
-		
-		for (File a : new File("sounds").listFiles()) {
-			try {
-				recorder.audioInputStream = AudioSystem.getAudioInputStream(a);
-			} catch (UnsupportedAudioFileException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			int j = 0;
-			char[] charArray = a.getName().toCharArray();
-			for (int i = 0; i < charArray.length; i++) {
-				if (!Character.isLetter(charArray[i])) {
-					j = i;
-					break;
-				}
-			}
-			String name = a.getName().substring(0, j);
-			System.out.println(name);
 
-			byte[] audioBytes = null;
-			AudioFormat format = recorder.audioInputStream.getFormat();
-
-			try {
-				while (recorder.audioInputStream.available() > 0) {
-					audioBytes = new byte[2756];
-					recorder.audioInputStream.read(audioBytes);
-					state.addBytes(audioBytes, name);
-				}
-			} catch (Exception ex) {
-				ex.printStackTrace();
-			}
-
-		
-
+		Catalogue catalogue = new StanCata();
+		state.catalogue = catalogue;
+		catalogue.compList = comlist;
+		for (IRun a : rlist) {
+			a.generateRandom();
+			a.setup(state);
 		}
+
+		TUtil.buildsoundfortests(recorder, state);
+
+		recorder.console = false;
+		recorder.visual = new Visual();
 		visual.repaint();
 		// System.exit(0);
 		recorder.state = state;
@@ -264,11 +253,11 @@ public class Recorder {
 
 	}
 
-	public static Visual visual ;
+	public static Visual visual;
 
 	public static Visual getVisual() {
-//		if(visual == null)
-//			visual = new Visual();
+		// if(visual == null)
+		// visual = new Visual();
 		return visual;
 	}
 }

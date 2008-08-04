@@ -40,18 +40,11 @@ public class BuildPossiblePatterns extends Run {
 	public static void main(String[] args) {
 		Recorder recorder = new Recorder(true);
 		BuildPossiblePatterns bpp = new BuildPossiblePatterns();
-
+		String string = "list.txt";
 		bpp.run(recorder);
-		try {
-			// Serialize to a file
-			ObjectOutput out = new ObjectOutputStream(new FileOutputStream(
-					"list.txt"));
-			out.writeObject(bpp.vrun);
-			out.close();
-
-		} catch (IOException e) {
-		}
+		TUtil.save(bpp.vrun, string);
 	}
+
 	List<IRun> lrun = new ArrayList<IRun>();{
 		lrun.add(new BlockCompareRun());
 		lrun.add(new CountLengthRun());

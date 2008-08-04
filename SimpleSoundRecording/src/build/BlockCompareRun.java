@@ -17,6 +17,11 @@ import main.Recorder;
 import main.TUtil;
 
 public class BlockCompareRun implements IRun, Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -100694517048033326L;
+
 	static final int top = 10;
 
 	int bottom;
@@ -92,4 +97,10 @@ public class BlockCompareRun implements IRun, Serializable {
 	public void setup(State state) {
 	}
 
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return "bottom "+ bottom;
+		
+	}
 }
