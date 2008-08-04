@@ -35,7 +35,7 @@ import compare.compareDots;
 
 public abstract class Catalogue {
 	public List<compare> compList = new ArrayList<compare>();
-	
+
 	public boolean accepted;
 	// List<bl> blist = new ArrayList<bl>();
 	// List<Integer> tdifList = new ArrayList<Integer>();
@@ -60,25 +60,27 @@ public abstract class Catalogue {
 			for (compare compare : compList) {
 				contList = compare.compare(name, clist, contList);
 				int b = buildDiffForTests(contList);
-				for (int i = 0; i < 3&& i < contList.size(); i++) {
+				for (int i = 0; i < 3 && i < contList.size(); i++) {
 					ITuple<String> tuple = contList.get(i);
 					int a = guessList.indexOf(tuple);
-					if(a != -1){
-						guessList.get(a).in += i-1;
+					if (a != -1) {
+						guessList.get(a).in += i - 1;
 					} else {
-						guessList.add(new ITuple(tuple.getValue(),i-1));
+						guessList.add(new ITuple(tuple.getValue(), i - 1));
 					}
 				}
-				//printstuff(name, contList, b, compare);
-				
+				// printstuff(name, contList, b, compare);
+
 			}
 
-			
-			
-			Collections.sort(guessList,Collections.reverseOrder());
+			Collections.sort(guessList, Collections.reverseOrder());
 			diff = 0;
 			buildDiffForTests(guessList);
-			System.out.println(diff+" "+testname+" "+guessList);
+			if (testname.equals("")) {
+				diff = 0;
+			} else
+				System.out.println(diff + " " + testname + " " + guessList);
+			System.out.println(guessList);
 			// if (!Recorder.console) {
 			// System.out.println(testname);
 			// System.out.println(contList);
@@ -87,6 +89,7 @@ public abstract class Catalogue {
 			// }
 		}
 		// System.out.println(diff);
+
 		lastname = name;
 		cclist.clear();
 		aftermatching();
@@ -106,7 +109,7 @@ public abstract class Catalogue {
 		if (b == -1) {
 			b = 10;
 		}
-		
+
 		diff += b;
 		return b;
 	}
@@ -125,7 +128,7 @@ public abstract class Catalogue {
 	public abstract void beforeMatching();
 
 	protected void visualstuff(String name, List<SoundBit> clist) {
-		if(Recorder.getVisual() == null)
+		if (Recorder.getVisual() == null)
 			return;
 		linecolor linecolor = refinery.addlist(clist, 0);
 		vheight += 1;

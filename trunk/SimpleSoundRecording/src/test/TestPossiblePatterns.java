@@ -47,36 +47,20 @@ public class TestPossiblePatterns extends Run {
 	}
 
 	protected void run(Recorder recorder) {
-		int bestle = 0;
-		int bestsi = 0;
-		int bestdiff = Integer.MAX_VALUE;
-		int pdiff = 0;
 
-		List<Integer> lolist = new ArrayList<Integer>();
-		List<Integer> losalist = new ArrayList<Integer>();
-		List<Integer> lobelist = new ArrayList<Integer>();
-		try {
-			// Deserialize from a file
-			
-			ObjectInputStream in = new ObjectInputStream(new FileInputStream(
-					"list.txt"));
-			// Deserialize the object
-			rlist = (List<IRun>) in.readObject();
-			in.close();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		String string = "list.txt";
+		rlist = (List<IRun>) TUtil.load(string);
 
 		comlist.add(new compareDots());
-//		comlist.add(new comparePattern());
-//		for (IRun a : rlist) {
-//			if (a.getCompare() != null)
-//				comlist.add(a.getCompare());
-//		}
+		comlist.add(new comparePattern());
+		for (IRun a : rlist) {
+			if (a.getCompare() != null)
+				comlist.add(a.getCompare());
+		}
+		List<IRun> blist = new ArrayList();
 		int lowest = Integer.MAX_VALUE;
 		int total = 0;
-		for (int i = 0; i < 1; i++) {
+		for (int i = 0; i < 200; i++) {
 
 			State state = new State();
 
@@ -93,14 +77,20 @@ public class TestPossiblePatterns extends Run {
 			todiff = runtests(recorder, state);
 			if (todiff < lowest) {
 				lowest = todiff;
-
+				//need to do a real copy
+				blist = (List<IRun>) TUtil.deepCopy(rlist);
 			}
 
 			System.out.println(todiff);
 			total += todiff;
 		}
 		System.out.println(total);
+		System.out.println(lowest);
+		System.out.println(blist);
+		TUtil.save(blist, "Recorder.txt");
 		System.exit(0);
 	}
+
+	
 
 }

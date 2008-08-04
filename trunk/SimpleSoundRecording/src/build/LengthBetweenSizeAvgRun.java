@@ -15,6 +15,10 @@ import main.TUtil;
 public class LengthBetweenSizeAvgRun implements IRun {
 
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3430504284091319588L;
 	List<Integer> lolist = new ArrayList<Integer>();
 	List<Integer> losalist = new ArrayList<Integer>();	
 
@@ -78,6 +82,11 @@ public class LengthBetweenSizeAvgRun implements IRun {
 	}
 
 	public void generateRandom() {
+	}
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return "sizeavg "+ssizeavg+"\nlengthbetween "+slengthbetween;
 	}
 
 }

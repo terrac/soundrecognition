@@ -22,9 +22,5 @@ public class BasicCatalogue extends Catalogue{
 		// super.visualstuff(name, clist);
 	}
 
-	@Override
-	protected void printstuff(String name, List<ITuple<String>> contList, int b) {
-		// TODO Auto-generated method stub
-		super.printstuff(name, contList, b);
-	}
+	
 }

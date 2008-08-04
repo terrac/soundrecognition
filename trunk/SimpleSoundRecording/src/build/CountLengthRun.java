@@ -14,6 +14,10 @@ import all.State;
 import catalogues.PCatalogue;
 
 public class CountLengthRun implements IRun{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8760435814781653078L;
 	int scountlen = 0;
 	public int execute(Recorder recorder) {
 		int lowest = Integer.MAX_VALUE;
@@ -64,5 +68,9 @@ public class CountLengthRun implements IRun{
 	}
 
 
-
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return "countlen "+scountlen;
+	}
 }
