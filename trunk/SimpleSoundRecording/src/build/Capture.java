@@ -52,6 +52,8 @@ import javax.sound.sampled.*;
 
 import all.State;
 
+import catalogues.StanCata;
+
 import com.sun.org.apache.xml.internal.serialize.LineSeparator;
 
 import java.awt.font.*;
@@ -187,13 +189,23 @@ import java.text.*;
 			boolean sending = false;
 			double second = 0;
 			boolean prevSend = false;
-
+			State state = new State(){
+				@Override
+				public void end(String name) {
+					// TODO Auto-generated method stub
+					super.end(name);
+					endcapture();
+				}
+			};
+			state.catalogue = new StanCata();
 			while (thread != null) {
 				if ((numBytesRead = line.read(data, 0, bufferLengthInBytes)) == -1) {
 					break;
 				}
 				
 				out.write(data, 0, numBytesRead);
+				state.addBytes(data, filename);
+					
 				
 
 
@@ -243,6 +255,7 @@ import java.text.*;
 		
 		public static void main(String s[]) {
 			Capture a= new Capture();
+			a.filename = s[0];
 			a.start();
 
 
