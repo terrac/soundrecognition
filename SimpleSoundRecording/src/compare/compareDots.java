@@ -23,33 +23,33 @@ public class compareDots implements compare {
 			if (sllist.size() - 1 < j) {
 				sllist.add(new ArrayList<NameList>());
 			}
-			NameList nextPart2 = null;
+			NameList nameList = null;
 			List<NameList> currentlist = sllist.get(j);
 			if (currentlist.size() > c.height) {
-				nextPart2 = currentlist.get(c.height);
+				nameList = currentlist.get(c.height);
 			} else {
 				while (currentlist.size() - 1 < c.height) {
 					currentlist.add(null);
 				}
 			}
 			if (!name.equals("")) {
-				if (nextPart2 == null) {
+				if (nameList == null) {
 
 					currentlist.add(c.height, new NameList(name));
 				} else {
-					int indexOf = nextPart2.names.indexOf(new ITuple<String>(
+					int indexOf = nameList.names.indexOf(new ITuple<String>(
 							name, 0));
 					if (-1 == indexOf) {
-						nextPart2.names.add(new ITuple<String>(name, 1));
+						nameList.names.add(new ITuple<String>(name, 1));
 					} else {
-						nextPart2.names.get(indexOf).in++;
+						nameList.names.get(indexOf).in++;
 					}
 				}
 
 			} else {
 
-				if (nextPart2 != null) {
-					for (ITuple<String> a : nextPart2.names) {
+				if (nameList != null) {
+					for (ITuple<String> a : nameList.names) {
 						int indexOf = contList.indexOf(a);
 						if (indexOf == -1) {
 
