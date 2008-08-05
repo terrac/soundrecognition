@@ -8,10 +8,10 @@ import java.util.Map;
 import compare.compare;
 
 import PatternMatch.Tuple;
-import all.State;
 
 import main.BasicCatalogue;
 import main.Recorder;
+import main.State;
 import main.TUtil;
 
 public class LengthBetweenSizeAvgRun implements IRun {
@@ -49,7 +49,7 @@ public class LengthBetweenSizeAvgRun implements IRun {
 				int tdiff = 0;
 				tdiff = Run.runtests(recorder, state);
 
-				System.out.println(state.lblist + " " + state.salist + " "
+				System.out.println(state.rlist+ " "
 						+ tdiff);
 				System.out.println(bestle + " " + bestsi + " " + bestdiff);
 
@@ -75,8 +75,7 @@ public class LengthBetweenSizeAvgRun implements IRun {
 	}
 
 	public void setup(State state) {
-		state.lblist.add(ssizeavg);
-		state.salist.add( slengthbetween);
+		state.add("default",ssizeavg,slengthbetween);
 	}
 
 	@Override

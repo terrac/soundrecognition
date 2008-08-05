@@ -3,7 +3,7 @@ package run;
 import java.util.Map;
 
 import main.Recorder;
-import all.State;
+import main.State;
 
 import compare.compare;
 import compare.comparePattern;

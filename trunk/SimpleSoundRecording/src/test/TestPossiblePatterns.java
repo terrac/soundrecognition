@@ -21,10 +21,10 @@ import run.Run;
 
 import main.BasicCatalogue;
 import main.Recorder;
+import main.State;
 import main.TUtil;
 
 import PatternMatch.SoundBit;
-import all.State;
 
 import catalogues.Catalogue;
 import catalogues.StanCata;
@@ -66,7 +66,7 @@ public class TestPossiblePatterns extends Run {
 
 			Catalogue catalogue = new StanCata();
 			state.catalogue = catalogue;
-			catalogue.compList = comlist;
+			catalogue.setCompares(comlist);
 			for (IRun a : rlist) {
 				a.getNext();
 				a.setup(state);

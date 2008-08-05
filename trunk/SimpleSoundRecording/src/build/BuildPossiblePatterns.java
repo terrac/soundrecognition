@@ -28,13 +28,13 @@ import run.Run;
 
 import main.BasicCatalogue;
 import main.Recorder;
+import main.State;
 import main.TUtil;
 
 
 import PatternMatch.Block;
 import PatternMatch.BlockCompare;
 import PatternMatch.SoundBit;
-import all.State;
 
 import catalogues.Catalogue;
 import catalogues.PCatalogue;

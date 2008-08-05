@@ -50,7 +50,8 @@ import java.io.*;
 
 import javax.sound.sampled.*;
 
-import all.State;
+import main.State;
+
 
 import catalogues.StanCata;
 
