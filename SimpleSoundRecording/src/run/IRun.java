@@ -9,12 +9,12 @@ import compare.compare;
 
 import main.BasicCatalogue;
 import main.Recorder;
+import main.State;
 import main.TUtil;
 import PatternMatch.Block;
 import PatternMatch.BlockCompare;
 import PatternMatch.SoundBit;
 import PatternMatch.Tuple;
-import all.State;
 
 public interface IRun extends Serializable {
 

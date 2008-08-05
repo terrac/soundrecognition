@@ -10,11 +10,12 @@ import compare.compareblock;
 
 import PatternMatch.Block;
 import PatternMatch.BlockCompare;
+import PatternMatch.LTuple;
 import PatternMatch.SoundBit;
 import PatternMatch.Tuple;
-import all.State;
 import main.BasicCatalogue;
 import main.Recorder;
+import main.State;
 import main.TUtil;
 
 public class BlockCompareRun implements IRun, Serializable {
@@ -45,11 +46,10 @@ public class BlockCompareRun implements IRun, Serializable {
 			for (int i = 0; i < lolist.size(); i++) {
 
 				State state = new State();
-				state.lblist.add(lolist.get(i));
-				state.salist.add(losalist.get(i));
+				state.add("default",lolist.get(i),losalist.get(i));
 				state.catalogue = new BasicCatalogue();
-				state.catalogue.compList.add(new compareDots());
-				state.catalogue.compList.add(compare);
+				state.catalogue.add("default",new compareDots());
+				state.catalogue.add("default",compare);
 				TUtil.buildsoundfortests(recorder, state);
 
 				int tdiff = 0;

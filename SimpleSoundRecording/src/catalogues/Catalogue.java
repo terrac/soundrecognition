@@ -34,7 +34,7 @@ import compare.compare;
 import compare.compareDots;
 
 public abstract class Catalogue {
-	public List<compare> compList = new ArrayList<compare>();
+	public Map<String, List<compare>> compMap = new HashMap<String, List<compare>>();
 
 	public boolean accepted;
 	// List<bl> blist = new ArrayList<bl>();
@@ -47,8 +47,8 @@ public abstract class Catalogue {
 		diff = 0;
 		// int count = 0;
 		accepted = false;
-		for (List<SoundBit> clist : cclist) {
-
+		for (String key : cclist.keySet()) {
+			List<SoundBit> clist = cclist.get(key);
 			visualstuff(name, clist);
 
 			clist.add(new SoundBit());
@@ -57,18 +57,18 @@ public abstract class Catalogue {
 			accepted = true;
 			List<ITuple<String>> contList = null;
 			List<ITuple<String>> guessList = new ArrayList<ITuple<String>>();
-			for (compare compare : compList) {
+			for (compare compare : compMap.get(key)) {
 				contList = compare.compare(name, clist, contList);
 				int b = buildDiffForTests(contList);
 				for (int i = 0; i < 3 && i < contList.size(); i++) {
 					ITuple<String> tuple = contList.get(i);
 					int a = guessList.indexOf(tuple);
-					
-					
+
 					if (a != -1) {
 						guessList.get(a).in += i - compare.getSignificance();
 					} else {
-						guessList.add(new ITuple(tuple.getValue(), i - compare.getSignificance()));
+						guessList.add(new ITuple(tuple.getValue(), i
+								- compare.getSignificance()));
 					}
 				}
 				// printstuff(name, contList, b, compare);
@@ -150,20 +150,30 @@ public abstract class Catalogue {
 		}
 	}
 
-	public void addavgfreq(int num) {
-		cclist.get(cclist.size() - 1).add(new SoundBit(num));
-
-	}
-
-	public void incrementList() {
-		cclist.add(new ArrayList<SoundBit>());
+	public void addavgfreq(int num, String lname) {
+		cclist.get(lname).add(new SoundBit(num));
 
 	}
 
 	int state = 0;
-	public List<List<SoundBit>> cclist = new ArrayList<List<SoundBit>>();
+	public Map<String, List<SoundBit>> cclist = new HashMap();
 
 	String lastname = "";
 	int vheight = 0;
 
+	public void setCompares(List<compare> comlist) {
+		for (compare a : comlist) {
+			if (!compMap.containsKey(a.getName())) {
+				compMap.put(a.getName(), new ArrayList<compare>());
+			}
+			compMap.get(a.getName()).add(a);
+		}
+	}
+
+	public void add(String a, compare b) {
+		if (!compMap.containsKey(a)) {
+			compMap.put(a, new ArrayList<compare>());
+		}
+		compMap.get(a).add(b);
+	}
 }

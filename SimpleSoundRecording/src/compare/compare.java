@@ -27,5 +27,13 @@ public abstract class compare implements Serializable {
 	public int getSizeAverage(){
 		return 0;
 	}
+	String name;
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 	
 }

@@ -33,7 +33,6 @@ import compare.comparePattern;
 import catalogues.Catalogue;
 import catalogues.StanCata;
 
-import all.State;
 
 public class Recorder {
 
@@ -88,7 +87,8 @@ public class Recorder {
 
 		Catalogue catalogue = new StanCata();
 		state.catalogue = catalogue;
-		catalogue.compList = comlist;
+		 catalogue.setCompares(comlist);
+		catalogue.compMap.put("default",  comlist);
 		for (IRun a : rlist) {
 			a.getNext();
 			a.setup(state);
@@ -103,6 +103,8 @@ public class Recorder {
 		recorder.state = state;
 		recorder.capture.start();
 	}
+
+	
 
 	public static boolean console = false;
 

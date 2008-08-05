@@ -18,7 +18,6 @@ import java.util.List;
 
 import javax.sound.sampled.AudioSystem;
 
-import all.State;
 
 public class TUtil {
 	public static void runFile(Recorder recorder, State state, File a,

@@ -9,9 +9,9 @@ import compare.compare;
 import compare.compareDots;
 
 import main.Recorder;
+import main.State;
 import main.TUtil;
 import PatternMatch.Tuple;
-import all.State;
 import catalogues.Catalogue;
 import catalogues.PCatalogue;
 
@@ -29,13 +29,12 @@ public class CountLengthRun implements IRun{
 		for (int i = 1000; i < 10000; i+= 100) {
 
 			State state = new State();
-			state.lblist.add(40);
-			state.salist.add(40);
+			state.add("default",40,40);
 			scountlen = i;
 			setup(state);
 			Catalogue catalogue = new PCatalogue();
 			state.catalogue = catalogue;
-			state.catalogue.compList.add(new compareDots());
+			state.catalogue.add("default",new compareDots());
 
 			TUtil.buildsoundfortests(recorder, state);
 			
