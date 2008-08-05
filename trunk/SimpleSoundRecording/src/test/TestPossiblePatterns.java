@@ -16,16 +16,17 @@ import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
+import run.IRun;
+import run.Run;
+
 import main.BasicCatalogue;
 import main.Recorder;
 import main.TUtil;
 
 import PatternMatch.SoundBit;
-import all.Catalogue;
 import all.State;
-import build.IRun;
-import build.Run;
 
+import catalogues.Catalogue;
 import catalogues.StanCata;
 
 import com.sun.org.apache.bcel.internal.generic.LLOAD;
@@ -52,7 +53,6 @@ public class TestPossiblePatterns extends Run {
 		rlist = (List<IRun>) TUtil.load(string);
 
 		comlist.add(new compareDots());
-		comlist.add(new comparePattern());
 		for (IRun a : rlist) {
 			if (a.getCompare() != null)
 				comlist.add(a.getCompare());
@@ -68,7 +68,7 @@ public class TestPossiblePatterns extends Run {
 			state.catalogue = catalogue;
 			catalogue.compList = comlist;
 			for (IRun a : rlist) {
-				a.generateRandom();
+				a.getNext();
 				a.setup(state);
 			}
 

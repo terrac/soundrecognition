@@ -256,6 +256,7 @@ import java.text.*;
 		public static void main(String s[]) {
 			Capture a= new Capture();
 			a.filename = s[0];
+			a.filename = "three";
 			a.start();
 
 

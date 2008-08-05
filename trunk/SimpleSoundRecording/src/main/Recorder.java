@@ -23,15 +23,16 @@ import javax.sound.sampled.TargetDataLine;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JFrame;
 
-import build.IRun;
+import run.IRun;
+
 
 import compare.compare;
 import compare.compareDots;
 import compare.comparePattern;
 
+import catalogues.Catalogue;
 import catalogues.StanCata;
 
-import all.Catalogue;
 import all.State;
 
 public class Recorder {
@@ -77,7 +78,7 @@ public class Recorder {
 		rlist = (List<IRun>) TUtil.load(string);
 
 		comlist.add(new compareDots());
-		comlist.add(new comparePattern());
+		
 		for (IRun a : rlist) {
 			if (a.getCompare() != null)
 				comlist.add(a.getCompare());
@@ -89,7 +90,7 @@ public class Recorder {
 		state.catalogue = catalogue;
 		catalogue.compList = comlist;
 		for (IRun a : rlist) {
-			a.generateRandom();
+			a.getNext();
 			a.setup(state);
 		}
 

@@ -4,13 +4,13 @@ import java.io.Serializable;
 
 public class ITuple<V> implements Comparable<ITuple>, Serializable {
 	V val;
-	public int in;
+	public double in;
 	public V getValue(){return val;}
-	public int getInt(){return in;}
+	public double getInt(){return in;}
 	@Override
 	public int compareTo(ITuple o) {
 		// TODO Auto-generated method stub
-		return o.in -in;
+		return Double.compare(o.in ,in);
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -19,7 +19,7 @@ public class ITuple<V> implements Comparable<ITuple>, Serializable {
 			return false;
 		return getValue().equals(((ITuple<String>)obj).getValue());
 	}
-	public ITuple(V a , int b){
+	public ITuple(V a , double b){
 		val = a;
 		in = b;
 	}

@@ -1,7 +1,9 @@
-package build;
+package run;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
 
 import compare.compare;
 import compare.compareDots;
@@ -9,8 +11,8 @@ import compare.compareDots;
 import main.Recorder;
 import main.TUtil;
 import PatternMatch.Tuple;
-import all.Catalogue;
 import all.State;
+import catalogues.Catalogue;
 import catalogues.PCatalogue;
 
 public class CountLengthRun implements IRun{
@@ -19,7 +21,7 @@ public class CountLengthRun implements IRun{
 	 */
 	private static final long serialVersionUID = 8760435814781653078L;
 	int scountlen = 0;
-	public int execute(Recorder recorder) {
+	public int execute(Recorder recorder,Map<String,Object> variables) {
 		int lowest = Integer.MAX_VALUE;
 		int countlen = 0;
 		
@@ -64,7 +66,9 @@ public class CountLengthRun implements IRun{
 		// TODO Auto-generated method stub
 		return null;
 	}
-	public void generateRandom() {
+
+	public boolean getNext() {
+		return false;
 	}
 
 
