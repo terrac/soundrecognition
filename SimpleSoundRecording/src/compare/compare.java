@@ -9,8 +9,23 @@ import PatternMatch.BlockCompare;
 import PatternMatch.SoundBit;
 import PatternMatch.ITuple;
 
-public interface compare extends Serializable {
+public abstract class compare implements Serializable {
 
-	public List compare(String name, List<PatternMatch.SoundBit> clist, List<ITuple<String>> contList);
+	public abstract List compare(String name, List<PatternMatch.SoundBit> clist,
+			List<ITuple<String>> contList);
 
+	public double getSignificance(){
+		return significance;
 	}
+	double significance = 1;
+	public void setSignificance(double significance) {
+		this.significance = significance;
+	}
+	public int getLengthBetween(){
+		return 0;
+	}
+	public int getSizeAverage(){
+		return 0;
+	}
+	
+}

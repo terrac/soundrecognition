@@ -1,7 +1,9 @@
-package build;
+package run;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
 
 import compare.compare;
 
@@ -19,11 +21,11 @@ public class LengthBetweenSizeAvgRun implements IRun {
 	 * 
 	 */
 	private static final long serialVersionUID = 3430504284091319588L;
-	List<Integer> lolist = new ArrayList<Integer>();
-	List<Integer> losalist = new ArrayList<Integer>();	
+	public List<Integer> lolist = new ArrayList<Integer>();
+	public List<Integer> losalist = new ArrayList<Integer>();	
 
 	int ssizeavg, slengthbetween;
-	public int execute(Recorder recorder) {
+	public int execute(Recorder recorder,Map<String,Object> variables) {
 		int bestle = 0;
 		int bestsi = 0;
 		int bestdiff = Integer.MAX_VALUE;
@@ -66,6 +68,8 @@ public class LengthBetweenSizeAvgRun implements IRun {
 		}
 		System.out.println(lolist);
 		System.out.println(losalist);
+		variables.put("lolist", lolist);
+		variables.put("losalist",losalist);
 		System.out.println(lobelist);
 		return 0;
 	}
@@ -81,7 +85,10 @@ public class LengthBetweenSizeAvgRun implements IRun {
 		return null;
 	}
 
-	public void generateRandom() {
+
+
+	public boolean getNext() {
+		return false;
 	}
 	@Override
 	public String toString() {

@@ -10,10 +10,11 @@ import java.util.Map;
 
 import PatternMatch.*;
 
-public class compareblock implements compare, Serializable	 {
+public class compareblock extends compare implements Serializable	 {
 	public List<Block> block = new ArrayList<Block>();
 	Map<String, BlockCompare> bmap = new HashMap<String, BlockCompare>();
-	
+	int lengthBetween = 0;
+	int sizeAverage = 0;
 	public List compare(String name, List<PatternMatch.SoundBit> clist,
 			List<ITuple<String>> contList) {
 		
@@ -43,7 +44,7 @@ public class compareblock implements compare, Serializable	 {
 					}
 	
 					@Override
-					public int getInt() {
+					public double getInt() {
 						// TODO Auto-generated method stub
 						return c;
 					}
@@ -51,7 +52,7 @@ public class compareblock implements compare, Serializable	 {
 					@Override
 					public int compareTo(ITuple o) {
 						// TODO Auto-generated method stub
-						return c - o.getInt();
+						return Double.compare(c , o.getInt());
 					}
 	
 					@Override
@@ -70,6 +71,18 @@ public class compareblock implements compare, Serializable	 {
 			return d;
 		}
 		return contList;
+	}
+	public int getLengthBetween() {
+		return lengthBetween;
+	}
+	public int getSizeAverage() {
+		return sizeAverage;
+	}
+	public void setLengthBetween(int lengthBetween) {
+		this.lengthBetween = lengthBetween;
+	}
+	public void setSizeAverage(int sizeAverage) {
+		this.sizeAverage = sizeAverage;
 	}
 	
 

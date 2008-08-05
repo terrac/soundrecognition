@@ -9,7 +9,7 @@ import java.util.Map;
 
 import PatternMatch.*;
 
-public class compareDots implements compare {
+public class compareDots extends compare {
 	List<List<NameList>> sllist = new ArrayList<List<NameList>>();
 
 	@Override
@@ -69,5 +69,9 @@ public class compareDots implements compare {
 
 		return contList;
 	}
-
+	@Override
+	public double getSignificance() {
+		// TODO Auto-generated method stub
+		return 1.1;
+	}
 }

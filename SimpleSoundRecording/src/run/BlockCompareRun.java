@@ -1,8 +1,9 @@
-package build;
+package run;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import compare.compareDots;
 import compare.compareblock;
@@ -29,32 +30,39 @@ public class BlockCompareRun implements IRun, Serializable {
 	compareblock compare = new compareblock();
 	List<Integer> bclist = new ArrayList<Integer>();
 
-	public int execute(Recorder recorder) {
+
+	public int execute(Recorder recorder,Map<String,Object> variables) {
 		List<Integer> tbclist = new ArrayList<Integer>();
 		int bestdiff = Integer.MAX_VALUE;
 
 		bestdiff = Integer.MAX_VALUE;
 
+		List<Integer> lolist = (List<Integer>) variables.get("lolist");
+		List<Integer> losalist =  (List<Integer>) variables.get("losalist");
 		for (int w = 0; w < top; w++) {
 			bottom = w;
 			setup();
-			State state = new State();
-			state.lblist.add(40);
-			state.salist.add(40);
-			state.catalogue = new BasicCatalogue();
-			state.catalogue.compList.add(new compareDots());
-			state.catalogue.compList.add(compare);
-			TUtil.buildsoundfortests(recorder, state);
+			for (int i = 0; i < lolist.size(); i++) {
 
-			int tdiff = 0;
-			tdiff = Run.runtests(recorder, state);
+				State state = new State();
+				state.lblist.add(lolist.get(i));
+				state.salist.add(losalist.get(i));
+				state.catalogue = new BasicCatalogue();
+				state.catalogue.compList.add(new compareDots());
+				state.catalogue.compList.add(compare);
+				TUtil.buildsoundfortests(recorder, state);
 
-			if (bestdiff > tdiff) {
-				bestdiff = tdiff;
-				bclist.add(w);
+				int tdiff = 0;
+				tdiff = Run.runtests(recorder, state);
+
+				if (bestdiff > tdiff) {
+					bestdiff = tdiff;
+					bclist.add(w);
+					compare.setLengthBetween(lolist.get(i));
+					compare.setSizeAverage(losalist.get(i));
+				}
 			}
-
-			bestdiff = Integer.MAX_VALUE;
+			
 		}
 		return bestdiff;
 	}
@@ -84,8 +92,17 @@ public class BlockCompareRun implements IRun, Serializable {
 		}
 	}
 
-	public void generateRandom() {
-		bottom = bclist.get((int) (Math.random() * bclist.size()));
+	int next = 0;
+
+	public boolean getNext() {
+
+		if (next == bclist.size()) {
+			return false;
+		} else {
+			bottom = bclist.get(next);
+			next++;
+			return true;
+		}
 	}
 
 	@Override
@@ -100,7 +117,7 @@ public class BlockCompareRun implements IRun, Serializable {
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return "bottom "+ bottom;
-		
+		return "bottom " + bottom;
+
 	}
 }

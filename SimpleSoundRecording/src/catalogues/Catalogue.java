@@ -1,4 +1,4 @@
-package all;
+package catalogues;
 
 import java.awt.Color;
 import java.awt.geom.Line2D;
@@ -63,10 +63,12 @@ public abstract class Catalogue {
 				for (int i = 0; i < 3 && i < contList.size(); i++) {
 					ITuple<String> tuple = contList.get(i);
 					int a = guessList.indexOf(tuple);
+					
+					
 					if (a != -1) {
-						guessList.get(a).in += i - 1;
+						guessList.get(a).in += i - compare.getSignificance();
 					} else {
-						guessList.add(new ITuple(tuple.getValue(), i - 1));
+						guessList.add(new ITuple(tuple.getValue(), i - compare.getSignificance()));
 					}
 				}
 				// printstuff(name, contList, b, compare);
@@ -159,7 +161,7 @@ public abstract class Catalogue {
 	}
 
 	int state = 0;
-	List<List<SoundBit>> cclist = new ArrayList<List<SoundBit>>();
+	public List<List<SoundBit>> cclist = new ArrayList<List<SoundBit>>();
 
 	String lastname = "";
 	int vheight = 0;

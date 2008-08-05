@@ -1,8 +1,10 @@
-package build;
+package run;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import catalogues.Catalogue;
 
 
 
@@ -13,7 +15,6 @@ import PatternMatch.Block;
 import PatternMatch.BlockCompare;
 import PatternMatch.SoundBit;
 import PatternMatch.Tuple;
-import all.Catalogue;
 import all.State;
 
 public class Run {

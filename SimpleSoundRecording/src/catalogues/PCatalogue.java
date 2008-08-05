@@ -3,7 +3,6 @@ package catalogues;
 import java.util.List;
 
 import PatternMatch.SoundBit;
-import all.Catalogue;
 
 public class PCatalogue extends Catalogue{
 

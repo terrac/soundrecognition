@@ -1,8 +1,9 @@
-package build;
+package run;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import compare.compare;
 
@@ -19,11 +20,11 @@ public interface IRun extends Serializable {
 
 	
 
-	public int execute(Recorder recorder);
+	public int execute(Recorder recorder,Map<String,Object> variables);
 	
 	public compare getCompare();
 	public void setup(State state);
 
-	public void generateRandom();
+	public boolean getNext();
 
 }

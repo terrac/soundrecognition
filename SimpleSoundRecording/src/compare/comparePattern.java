@@ -16,7 +16,7 @@ import PatternMatch.BlockCompare;
 import PatternMatch.ITuple;
 import PatternMatch.SoundBit;
 
-public class comparePattern implements compare {
+public class comparePattern extends compare {
 
 	Map<String, String> map = new HashMap<String, String>();
 

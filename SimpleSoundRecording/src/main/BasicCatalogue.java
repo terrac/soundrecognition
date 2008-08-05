@@ -2,9 +2,10 @@ package main;
 
 import java.util.List;
 
+import catalogues.Catalogue;
+
 import PatternMatch.SoundBit;
 import PatternMatch.ITuple;
-import all.Catalogue;
 
 public class BasicCatalogue extends Catalogue{
 

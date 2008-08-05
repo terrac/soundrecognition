@@ -18,6 +18,8 @@ import javax.sound.sampled.AudioSystem;
 
 import old.Comparison;
 
+import catalogues.Catalogue;
+
 import com.sun.org.apache.regexp.internal.recompile;
 
 public class State {
