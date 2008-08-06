@@ -60,6 +60,7 @@ public class BlockCompareRun implements IRun, Serializable {
 					bclist.add(w);
 					compare.setLengthBetween(lolist.get(i));
 					compare.setSizeAverage(losalist.get(i));
+					compare.defaultName();
 				}
 			}
 			
