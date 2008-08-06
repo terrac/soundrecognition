@@ -151,6 +151,9 @@ public abstract class Catalogue {
 	}
 
 	public void addavgfreq(int num, String lname) {
+		if(!cclist.containsKey(lname)){
+			cclist.put(lname, new ArrayList<SoundBit>());
+		}
 		cclist.get(lname).add(new SoundBit(num));
 
 	}

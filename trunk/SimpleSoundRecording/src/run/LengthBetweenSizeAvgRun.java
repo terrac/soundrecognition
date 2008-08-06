@@ -75,7 +75,7 @@ public class LengthBetweenSizeAvgRun implements IRun {
 	}
 
 	public void setup(State state) {
-		state.add("default",ssizeavg,slengthbetween);
+		state.add("default",lolist.get(count),losalist.get(count));
 	}
 
 	@Override
@@ -85,14 +85,19 @@ public class LengthBetweenSizeAvgRun implements IRun {
 	}
 
 
-
+	int count = 0;
 	public boolean getNext() {
+		if(count < lolist.size() -1){
+			count++;
+			return true;
+		}
+		
 		return false;
 	}
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return "sizeavg "+ssizeavg+"\nlengthbetween "+slengthbetween;
+		return "sizeavg "+lolist+"\nlengthbetween "+losalist;
 	}
 
 }
