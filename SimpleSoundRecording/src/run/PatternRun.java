@@ -36,7 +36,7 @@ public class PatternRun implements IRun {
 			state.catalogue.add("default", new compareDots());
 			state.catalogue.add("default", compPattern);
 			TUtil.buildsoundfortests(recorder, state);
-
+			compPattern.reset();
 			int tdiff = 0;
 			tdiff = Run.runtests(recorder, state);
 

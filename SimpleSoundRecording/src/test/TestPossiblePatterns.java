@@ -52,7 +52,7 @@ public class TestPossiblePatterns extends Run {
 		String string = "list.txt";
 		rlist = (List<IRun>) TUtil.load(string);
 
-		comlist.add(new compareDots());
+		
 		for (IRun a : rlist) {
 			if (a.getCompare() != null)
 				comlist.add(a.getCompare());
@@ -63,15 +63,18 @@ public class TestPossiblePatterns extends Run {
 		for (int i = 0; i < 200; i++) {
 
 			State state = new State();
-
+			
 			Catalogue catalogue = new StanCata();
 			state.catalogue = catalogue;
 			catalogue.setCompares(comlist);
+			state.setCompares(comlist);
 			for (IRun a : rlist) {
 				a.getNext();
 				a.setup(state);
 			}
-
+			for (compare a : comlist) {
+				a.reset();
+			}
 			TUtil.buildsoundfortests(recorder, state);
 			int todiff = 0;
 			todiff = runtests(recorder, state);

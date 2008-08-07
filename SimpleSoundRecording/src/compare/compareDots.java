@@ -10,13 +10,17 @@ import java.util.Map;
 import PatternMatch.*;
 
 public class compareDots extends compare {
-	List<List<NameList>> sllist = new ArrayList<List<NameList>>();
-
+	
+    List<List<NameList>> sllist = new ArrayList<List<NameList>>();
+    public void reset() {
+		sllist.clear();
+	}
+	private static final long serialVersionUID = 1L;
 	@Override
 	public List compare(String name, List<SoundBit> clist,
 			List<ITuple<String>> contList) {
-		// TODO Auto-generated method stub
-
+		
+		
 		contList = new ArrayList();
 		int j = 0;
 		for (SoundBit c : clist) {
