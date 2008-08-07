@@ -17,6 +17,10 @@ public class compareblock extends compare implements Serializable	 {
 	private static final long serialVersionUID = -1292260982656897090L;
 	public List<Block> block = new ArrayList<Block>();
 	Map<String, BlockCompare> bmap = new HashMap<String, BlockCompare>();
+	public void reset() {
+		block.clear();
+		bmap.clear();
+	}
 	
 	public List compare(String name, List<PatternMatch.SoundBit> clist,
 			List<ITuple<String>> contList) {

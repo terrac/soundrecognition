@@ -76,7 +76,6 @@ public class Recorder {
 		String string = "Recorder.txt";
 		rlist = (List<IRun>) TUtil.load(string);
 
-		comlist.add(new compareDots());
 		
 		for (IRun a : rlist) {
 			if (a.getCompare() != null)
@@ -88,7 +87,11 @@ public class Recorder {
 		Catalogue catalogue = new StanCata();
 		state.catalogue = catalogue;
 		 catalogue.setCompares(comlist);
-		catalogue.compMap.put("default",  comlist);
+		 state.setCompares(comlist);
+		 for (compare a : comlist) {
+				a.reset();
+			}
+		//catalogue.compMap.put("default",  comlist);
 		for (IRun a : rlist) {
 			a.getNext();
 			a.setup(state);

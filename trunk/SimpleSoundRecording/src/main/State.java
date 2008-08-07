@@ -22,6 +22,7 @@ import PatternMatch.LTuple;
 import catalogues.Catalogue;
 
 import com.sun.org.apache.regexp.internal.recompile;
+import compare.compare;
 
 public class State {
 
@@ -29,8 +30,7 @@ public class State {
 
 
 	public List<LTuple> rlist = new ArrayList();
-	public int lengthbetween = 458;
-	public int sizeavg = 294;
+
 	public int precision = 1000;
 	public int countlength = 4400;
 	int dfreq = 0;
@@ -102,8 +102,13 @@ public class State {
 			}
 		}
 		for (int i = 0; i < rlist.size(); i++) {
-			lengthbetween = rlist.get(i).getLengthBetween();
-			sizeavg = rlist.get(i).getSizeAverage();
+			
+			int lengthbetween = rlist.get(i).getLengthBetween();
+			int sizeavg = rlist.get(i).getSizeAverage();
+			
+			if(lengthbetween == 0||sizeavg ==0){
+				throw new RuntimeException("cannot be 0"+rlist);
+			}
 			
 			int y = 0;
 
@@ -183,5 +188,9 @@ public class State {
 	public void add(Object ...objects ){
 		rlist.add(new LTuple(objects));
 	}
-	
+	public void setCompares(List<compare> comlist) {
+		for (compare a : comlist) {
+			add(a.getName(),a.getLengthBetween(),a.getSizeAverage());
+		}
+	}
 }

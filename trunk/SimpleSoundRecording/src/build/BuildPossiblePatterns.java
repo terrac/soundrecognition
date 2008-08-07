@@ -22,7 +22,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import run.BlockCompareRun;
 import run.CountLengthRun;
 import run.IRun;
-import run.LengthBetweenSizeAvgRun;
+import run.LengthBetweenSizeAvgCompDotsRun;
 import run.Run;
 
 
@@ -55,8 +55,8 @@ public class BuildPossiblePatterns extends Run {
 
 	List<IRun> lrun = new ArrayList<IRun>();{
 		lrun.add(new CountLengthRun());
-		lrun.add(new LengthBetweenSizeAvgRun());
-		lrun.add(new run.PatternRun());
+		lrun.add(new LengthBetweenSizeAvgCompDotsRun());
+	//	lrun.add(new run.PatternRun());
 		lrun.add(new BlockCompareRun());
 		
 	}

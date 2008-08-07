@@ -109,20 +109,16 @@ public class TUtil {
 			ByteArrayInputStream bin = new ByteArrayInputStream(bos
 					.toByteArray()); // E
 			ois = new ObjectInputStream(bin); // F
+			Object readObject = ois.readObject();
 			// return the new object
-			return ois.readObject(); // G
+			oos.close();
+			ois.close();
+			
+			return readObject; // G
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			try {
-				oos.close();
-				ois.close();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		} 
 
-		}
 		return null;
 	}
 	

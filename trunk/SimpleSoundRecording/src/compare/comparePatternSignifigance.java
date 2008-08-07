@@ -23,7 +23,13 @@ public class comparePatternSignifigance extends compare {
 
 	Map<String, String> map = new HashMap<String, String>();
 
-	Map<String,Set<String>> smap = new HashMap();
+	Map<String, Set<String>> smap = new HashMap();
+
+	public void reset() {
+		smap.clear();
+		map.clear();
+	}
+
 	@Override
 	public List compare(String name, List<SoundBit> clist,
 			List<ITuple<String>> contList) {
@@ -50,32 +56,36 @@ public class comparePatternSignifigance extends compare {
 
 		// System.out.println(bc);
 		if (!name.equals("")) {
-			
+
 			Set<String> set = new HashSet<String>();
 			if (map.containsKey(name)) {
 				String string = map.get(name);
 				for (int i = 0; i < pattern.length(); i++) {
 					for (int j = 0; j < pattern.length(); j++) {
-						String a = pattern.substring(i, j);
-						
-						if(string.contains(a)){
+						int k = i + j;
+						if (k >= pattern.length()) {
+							continue;
+						}
+						String a = pattern.substring(i, k);
+
+						if (string.contains(a)) {
 							set.add(a);
 						}
 					}
 				}
 			}
-			if(!smap.containsKey(name)){
+			if (!smap.containsKey(name)) {
 				smap.put(name, set);
 			} else {
 				Set<String> cur = smap.get(name);
-				
+
 				// can't modify while iterating
 				List<String> remove = new ArrayList<String>();
 				for (String string : cur) {
-					if(!set.contains(cur)){
+					if (!set.contains(cur)) {
 						remove.add(string);
 					}
-				}				
+				}
 				for (String string2 : remove) {
 					cur.remove(string2);
 				}
@@ -88,11 +98,11 @@ public class comparePatternSignifigance extends compare {
 				Set<String> a = smap.get(tuple.getValue());
 				boolean flag = true;
 				for (String string3 : a) {
-					if(!pattern.contains(string3)){
+					if (!pattern.contains(string3)) {
 						flag = false;
 					}
 				}
-				if(flag){
+				if (flag) {
 					tlist.add(tuple);
 				}
 			}
@@ -101,6 +111,7 @@ public class comparePatternSignifigance extends compare {
 		}
 		return contList;
 	}
+
 	@Override
 	public double getSignificance() {
 		// TODO Auto-generated method stub

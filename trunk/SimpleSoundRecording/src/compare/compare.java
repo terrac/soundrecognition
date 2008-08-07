@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import run.LengthBetweenSizeAvgRun;
+import run.LengthBetweenSizeAvgCompDotsRun;
 
 import PatternMatch.BlockCompare;
 import PatternMatch.SoundBit;
@@ -13,6 +13,7 @@ import PatternMatch.ITuple;
 
 public abstract class compare implements Serializable {
 	private static final long serialVersionUID = -1723980345464253483L;
+
 	public abstract List compare(String name,
 			List<PatternMatch.SoundBit> clist, List<ITuple<String>> contList);
 
@@ -29,19 +30,25 @@ public abstract class compare implements Serializable {
 	public int getLengthBetween() {
 		return lengthBetween;
 	}
+
 	public int getSizeAverage() {
 		return sizeAverage;
 	}
+
 	public void setLengthBetween(int lengthBetween) {
 		this.lengthBetween = lengthBetween;
 	}
+
 	public void setSizeAverage(int sizeAverage) {
 		this.sizeAverage = sizeAverage;
 	}
-	
+
 	int lengthBetween = 0;
 	int sizeAverage = 0;
 	String name;
+	{
+		name = this.getClass().getSimpleName();
+	}
 
 	public String getName() {
 		return name;
@@ -52,7 +59,11 @@ public abstract class compare implements Serializable {
 	}
 
 	public void defaultName() {
-		this.name = getLengthBetween() +" "+getSizeAverage();
+		this.name = getLengthBetween() + " " + getSizeAverage();
+	}
+
+	public void reset() {
+		throw new RuntimeException("no reset");
 	}
 
 }

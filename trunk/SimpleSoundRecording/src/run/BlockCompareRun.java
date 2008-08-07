@@ -28,7 +28,9 @@ public class BlockCompareRun implements IRun, Serializable {
 
 	int bottom;
 	BlockCompare bc;
-	compareblock compare = new compareblock();
+	compareblock compare = new compareblock();{
+	
+	}
 	List<Integer> bclist = new ArrayList<Integer>();
 
 
@@ -46,6 +48,7 @@ public class BlockCompareRun implements IRun, Serializable {
 			for (int i = 0; i < lolist.size(); i++) {
 
 				State state = new State();
+				compare.reset();
 				state.add("default",lolist.get(i),losalist.get(i));
 				state.catalogue = new BasicCatalogue();
 				state.catalogue.add("default",new compareDots());
