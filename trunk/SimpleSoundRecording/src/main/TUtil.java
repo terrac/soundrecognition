@@ -150,4 +150,9 @@ public class TUtil {
 		} catch (IOException e) {
 		}
 	}
+	
+	public static double within(double a, double b) {
+
+		return Math.abs(a - b) ;
+	}
 }

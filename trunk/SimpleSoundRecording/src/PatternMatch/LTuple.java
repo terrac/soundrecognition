@@ -1,5 +1,7 @@
 package PatternMatch;
 
+import java.util.Arrays;
+
 public class LTuple  {
 	public Object[] val;
 	
@@ -25,6 +27,6 @@ public class LTuple  {
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return val.toString();
+		return Arrays.asList(val).toString();
 	}
 }

@@ -54,10 +54,10 @@ public class BuildPossiblePatterns extends Run {
 	}
 
 	List<IRun> lrun = new ArrayList<IRun>();{
-		lrun.add(new CountLengthRun());
+		//lrun.add(new CountLengthRun());
 		lrun.add(new LengthBetweenSizeAvgCompDotsRun());
 	//	lrun.add(new run.PatternRun());
-		lrun.add(new BlockCompareRun());
+	//	lrun.add(new BlockCompareRun());
 		
 	}
 	List<IRun> vrun = new ArrayList<IRun>();

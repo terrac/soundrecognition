@@ -60,11 +60,11 @@ public class TestPossiblePatterns extends Run {
 		List<IRun> blist = new ArrayList();
 		int lowest = Integer.MAX_VALUE;
 		int total = 0;
-		for (int i = 0; i < 200; i++) {
+		for (int i = 0; i < 1; i++) {
 
 			State state = new State();
 			
-			Catalogue catalogue = new StanCata();
+			Catalogue catalogue = new BasicCatalogue();
 			state.catalogue = catalogue;
 			catalogue.setCompares(comlist);
 			state.setCompares(comlist);
@@ -85,6 +85,7 @@ public class TestPossiblePatterns extends Run {
 			}
 
 			System.out.println(todiff);
+			System.out.println(state.rlist);
 			total += todiff;
 		}
 		System.out.println(total);

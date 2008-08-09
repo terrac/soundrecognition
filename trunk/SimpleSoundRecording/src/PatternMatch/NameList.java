@@ -15,10 +15,10 @@ public class NameList implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	public List<ITuple<String>> names = new ArrayList();
+	public List<String> names = new ArrayList();
 
 	public NameList(String b) {
-		names.add(new ITuple<String>(b,1));
+		names.add(b);
 	}
 	@Override
 	public String toString() {

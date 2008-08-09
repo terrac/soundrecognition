@@ -32,7 +32,7 @@ public class State {
 	public List<LTuple> rlist = new ArrayList();
 
 	public int precision = 1000;
-	public int countlength = 4400;
+	public int countlength = 9900;
 	int dfreq = 0;
 	int freq = 0;
 	int localHigh = 0;
@@ -151,7 +151,7 @@ public class State {
 	}
 
 	public void start() {
-		catalogue.cclist.clear();
+		catalogue.ccMap.clear();
 
 		startline = true;
 		avgFreq = new ArrayList<Integer>();
