@@ -6,73 +6,81 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import main.TUtil;
+
+import com.sun.xml.internal.ws.api.addressing.AddressingVersion;
+
+import sun.security.x509.AVA;
+import util.Average;
 
 import PatternMatch.*;
 
 public class compareDots extends compare {
-	
-    List<List<NameList>> sllist = new ArrayList<List<NameList>>();
-    public void reset() {
-		sllist.clear();
+
+	Map<Integer, Map<String, Average>> hMap = new HashMap();
+
+	public void reset() {
+		hMap.clear();
+
 	}
+
 	private static final long serialVersionUID = 1L;
+
 	@Override
 	public List compare(String name, List<SoundBit> clist,
 			List<ITuple<String>> contList) {
-		
-		
+
 		contList = new ArrayList();
-		int j = 0;
+		Map<Integer, Integer> aMap = new HashMap();
 		for (SoundBit c : clist) {
-			if (sllist.size() - 1 < j) {
-				sllist.add(new ArrayList<NameList>());
-			}
-			NameList nameList = null;
-			List<NameList> currentlist = sllist.get(j);
-			if (currentlist.size() > c.height) {
-				nameList = currentlist.get(c.height);
-			} else {
-				while (currentlist.size() - 1 < c.height) {
-					currentlist.add(null);
-				}
-			}
-			if (!name.equals("")) {
-				if (nameList == null) {
 
-					currentlist.add(c.height, new NameList(name));
-				} else {
-					int indexOf = nameList.names.indexOf(new ITuple<String>(
-							name, 0));
-					if (-1 == indexOf) {
-						nameList.names.add(new ITuple<String>(name, 1));
-					} else {
-						nameList.names.get(indexOf).in++;
-					}
-				}
-
-			} else {
-
-				if (nameList != null) {
-					for (ITuple<String> a : nameList.names) {
-						int indexOf = contList.indexOf(a);
-						if (indexOf == -1) {
-
-							contList.add(new ITuple<String>(a.getValue(), 1));
-						}
-
-						else {
-							contList.get(indexOf).in++;
-						}
-					}
-				}
-			}
-
-			j++;
+			if (!aMap.containsKey(c.height))
+				aMap.put(c.height, 1);
+			else
+				aMap.put(c.height, aMap.get(c.height) + 1);
 		}
-		Collections.sort(contList);
+		if (!name.equals("")) {
+			for (Integer a : aMap.keySet()) {
+				if (!hMap.containsKey(a)) {
+					hMap.put(a, new HashMap());
+				}
+				Map<String, Average> map = hMap.get(a);
+				if (map.containsKey(name)) {
+					map.get(name).add((double) aMap.get(a));
+				} else {
+
+					map.put(name, new Average(aMap.get(a)));
+				}
+
+			}
+
+		} else {
+
+			for (Integer a : aMap.keySet()) {
+				if (!hMap.containsKey(a)) {
+					hMap.put(a, new HashMap());
+				}
+				Map<String, Average> map = hMap.get(a);
+				for (String b : map.keySet()) {
+					double c = TUtil.within(map.get(b).getAverage(), aMap
+							.get(a));
+					// if(c < 10){
+					int indexOf = contList.indexOf(new ITuple<String>(b, 0));
+					if (indexOf == -1) {
+						contList.add(new ITuple<String>(b, c));
+					} else {
+						contList.get(indexOf).in += c;
+					}
+					// }
+				}
+
+			}
+		}
+		Collections.sort(contList );
 
 		return contList;
 	}
+
 	@Override
 	public double getSignificance() {
 		// TODO Auto-generated method stub

@@ -73,7 +73,7 @@ public class LengthBetweenSizeAvgCompDotsRun implements IRun {
 
 			}
 
-			bestdiff = Integer.MAX_VALUE;
+			//bestdiff = Integer.MAX_VALUE;
 		}
 		System.out.println(lolist);
 		System.out.println(losalist);

@@ -47,16 +47,18 @@ public abstract class Catalogue {
 		diff = 0;
 		// int count = 0;
 		accepted = false;
-		for (String key : cclist.keySet()) {
-			List<SoundBit> clist = cclist.get(key);
+		
+		List<ITuple<String>> contList = null;
+		List<ITuple<String>> guessList = new ArrayList<ITuple<String>>();
+		for (String key : ccMap.keySet()) {
+			List<SoundBit> clist = ccMap.get(key);
 			visualstuff(name, clist);
 
 			clist.add(new SoundBit());
 			clist.add(0, new SoundBit());
 
 			accepted = true;
-			List<ITuple<String>> contList = null;
-			List<ITuple<String>> guessList = new ArrayList<ITuple<String>>();
+			
 			for (compare compare : compMap.get(key)) {
 				contList = compare.compare(name, clist, contList);
 				int b = buildDiffForTests(contList);
@@ -71,7 +73,7 @@ public abstract class Catalogue {
 								- compare.getSignificance()));
 					}
 				}
-				// printstuff(name, contList, b, compare);
+				 printstuff(name, contList, b, compare);
 
 			}
 
@@ -93,7 +95,7 @@ public abstract class Catalogue {
 		// System.out.println(diff);
 
 		lastname = name;
-		cclist.clear();
+		ccMap.clear();
 		aftermatching();
 	}
 
@@ -151,15 +153,15 @@ public abstract class Catalogue {
 	}
 
 	public void addavgfreq(int num, String lname) {
-		if(!cclist.containsKey(lname)){
-			cclist.put(lname, new ArrayList<SoundBit>());
+		if(!ccMap.containsKey(lname)){
+			ccMap.put(lname, new ArrayList<SoundBit>());
 		}
-		cclist.get(lname).add(new SoundBit(num));
+		ccMap.get(lname).add(new SoundBit(num));
 
 	}
 
 	int state = 0;
-	public Map<String, List<SoundBit>> cclist = new HashMap();
+	public Map<String, List<SoundBit>> ccMap = new HashMap();
 
 	String lastname = "";
 	int vheight = 0;

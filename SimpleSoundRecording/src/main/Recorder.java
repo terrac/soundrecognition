@@ -76,7 +76,7 @@ public class Recorder {
 		String string = "Recorder.txt";
 		rlist = (List<IRun>) TUtil.load(string);
 
-		
+		System.out.println(rlist);
 		for (IRun a : rlist) {
 			if (a.getCompare() != null)
 				comlist.add(a.getCompare());
@@ -99,9 +99,9 @@ public class Recorder {
 
 		TUtil.buildsoundfortests(recorder, state);
 
-		recorder.console = false;
-		recorder.visual = new Visual();
-		visual.repaint();
+//		recorder.console = false;
+//		recorder.visual = new Visual();
+//		visual.repaint();
 		// System.exit(0);
 		recorder.state = state;
 		recorder.capture.start();

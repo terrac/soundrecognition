@@ -28,6 +28,13 @@ public class PatternRun implements IRun {
 		List<Integer> lolist = (List<Integer>) variables.get("lolist");
 		List<Integer> losalist = (List<Integer>) variables.get("losalist");
 
+//		if(lolist == null){
+//			lolist = new ArrayList<Integer>();
+//			lolist.add(40);
+//			losalist = new ArrayList<Integer>();
+//			losalist.add(40);
+//		}
+		
 		for (int i = 0; i < lolist.size(); i++) {
 
 			State state = new State();
@@ -35,8 +42,9 @@ public class PatternRun implements IRun {
 			state.catalogue = new BasicCatalogue();
 			state.catalogue.add("default", new compareDots());
 			state.catalogue.add("default", compPattern);
-			TUtil.buildsoundfortests(recorder, state);
 			compPattern.reset();
+			TUtil.buildsoundfortests(recorder, state);
+			
 			int tdiff = 0;
 			tdiff = Run.runtests(recorder, state);
 
