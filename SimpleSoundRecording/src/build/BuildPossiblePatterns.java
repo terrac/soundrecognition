@@ -19,7 +19,7 @@ import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
-import run.BlockCompareRun;
+import run.CompareRun;
 import run.CountLengthRun;
 import run.IRun;
 import run.LengthBetweenSizeAvgCompDotsRun;
@@ -35,11 +35,15 @@ import main.TUtil;
 import PatternMatch.Block;
 import PatternMatch.BlockCompare;
 import PatternMatch.SoundBit;
+import PatternMatch.Tuple;
 
 import catalogues.Catalogue;
 import catalogues.PCatalogue;
 
 import com.sun.org.apache.bcel.internal.generic.LLOAD;
+import compare.compareDotsTop;
+import compare.compareUpDownMiddle;
+import compare.compareblock;
 
 public class BuildPossiblePatterns extends Run {
 
@@ -55,19 +59,28 @@ public class BuildPossiblePatterns extends Run {
 
 	List<IRun> lrun = new ArrayList<IRun>();{
 		//lrun.add(new CountLengthRun());
-		lrun.add(new LengthBetweenSizeAvgCompDotsRun());
+//		lrun.add(new LengthBetweenSizeAvgCompDotsRun());
+	//	lrun.add(new LengthBetweenSizeAvgCompDotsRun(new compareDotsTop()));
 	//	lrun.add(new run.PatternRun());
-	//	lrun.add(new BlockCompareRun());
+		
+		lrun.add(new CompareRun(new compareUpDownMiddle()));
+		//lrun.add(new CompareRun(new compareblock()));
 		
 	}
-	List<IRun> vrun = new ArrayList<IRun>();
+	List<Tuple<IRun, Integer>> vrun = new ArrayList();
 	protected void run(Recorder recorder) {
 		Map<String,Object> variables = new HashMap<String, Object>();
+		ArrayList arrayList = new ArrayList();
+		arrayList.add(120);
+		variables.put("losalist", arrayList);
+	    arrayList = new ArrayList();
+		arrayList.add(281);
+		variables.put("lolist", arrayList);
 		for (IRun a : lrun) {
 			//if(
-					a.execute(recorder,variables);
+					int execute = a.execute(recorder,variables);
 				//	< 3000000){
-				vrun.add(a);
+				vrun.add(new Tuple<IRun, Integer>(a,execute));
 			//}
 		}
 		System.out.println(vrun);

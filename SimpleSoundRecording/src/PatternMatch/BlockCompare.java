@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import catalogues.Catalogue;
+
 public class BlockCompare implements Serializable{
 
 	
@@ -20,33 +22,18 @@ public class BlockCompare implements Serializable{
 
 			}
 		}
-		height = highest;
-		length = a.size();
 		for (Block b : block) {		
-			if (b.execute(a, this)) {
+			if (b.execute(a, this, highest)) {
 				blocksFound.add(b);
 
 			}
 		}
+		//System.out.println(blocksFound);
+		Catalogue.printout += blocksFound;
 	}
 
-	public int compare(BlockCompare a) {
-		// TODO Auto-generated method stub
-		int count = 0;
-		for (Block b : a.blocksFound) {
-			boolean flag = false;
-			for (Block c : blocksFound) {
-				if (c.equals(b))
-					flag = true;
-			}
-			if (flag)
-				count++;
-		}
-		return count;
-
-	}
-
-	List<Block> blocksFound = new ArrayList<Block>();
+	
+	public List<Block> blocksFound = new ArrayList<Block>();
 
 	@Override
 	public String toString() {
@@ -54,6 +41,4 @@ public class BlockCompare implements Serializable{
 		return blocksFound.toString();
 	}
 
-	public int height;
-	public int length;
 }

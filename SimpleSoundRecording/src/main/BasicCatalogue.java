@@ -19,11 +19,7 @@ public class BasicCatalogue extends Catalogue{
 	//	System.out.println("after");
 	}
 
-	@Override
-	protected void visualstuff(String name, List<SoundBit> clist) {
-		// TODO Auto-generated method stub
-		// super.visualstuff(name, clist);
-	}
+	
 	@Override
 	protected void printstuff(String name, List<ITuple<String>> contList,
 			int b, compare compare) {

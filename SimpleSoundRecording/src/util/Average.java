@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Average implements Serializable{
 	List<Double> numbers = new ArrayList<Double>();
-	
+	                                                   
 	public void add(Double a) {
 		numbers.add(a);
 	}
@@ -22,5 +22,10 @@ public class Average implements Serializable{
 			b += a;
 		}
 		return b / numbers.size();
+	}
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return getAverage()+"";
 	}
 }

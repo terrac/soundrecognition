@@ -1,4 +1,4 @@
-package old;
+package main;
 
 public enum dir {
 	up,down,middle

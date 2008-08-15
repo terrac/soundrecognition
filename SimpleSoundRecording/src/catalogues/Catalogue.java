@@ -12,10 +12,10 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
 
-import old.dir;
 
 import main.Pattern;
 import main.Recorder;
+import main.dir;
 import main.linecolor;
 import main.refinery;
 
@@ -41,13 +41,13 @@ public abstract class Catalogue {
 	// List<Integer> tdifList = new ArrayList<Integer>();
 	public String testname = "";
 	public int diff = 0;
-
+	public static String printout = "";
 	public void end(String name) {
 		beforeMatching();
 		diff = 0;
 		// int count = 0;
 		accepted = false;
-		
+		printout += "\n"+testname+name;
 		List<ITuple<String>> contList = null;
 		List<ITuple<String>> guessList = new ArrayList<ITuple<String>>();
 		for (String key : ccMap.keySet()) {
@@ -62,6 +62,7 @@ public abstract class Catalogue {
 			for (compare compare : compMap.get(key)) {
 				contList = compare.compare(name, clist, contList);
 				int b = buildDiffForTests(contList);
+				printout+=testname +" "+b;
 				for (int i = 0; i < 3 && i < contList.size(); i++) {
 					ITuple<String> tuple = contList.get(i);
 					int a = guessList.indexOf(tuple);
@@ -82,9 +83,10 @@ public abstract class Catalogue {
 			buildDiffForTests(guessList);
 			if (testname.equals("")) {
 				diff = 0;
-			} else
-				System.out.println(diff + " " + testname + " " + guessList);
-			System.out.println(guessList);
+			} else{
+				//System.out.println(diff + " " + testname + " " + guessList);
+			}
+			//System.out.println(guessList);
 			// if (!Recorder.console) {
 			// System.out.println(testname);
 			// System.out.println(contList);

@@ -27,7 +27,9 @@ import compare.compare;
 public class State {
 
 	public Catalogue catalogue;
-
+public State() {
+	Catalogue.printout = "";
+}
 
 	public List<LTuple> rlist = new ArrayList();
 

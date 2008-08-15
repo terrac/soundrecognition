@@ -25,6 +25,5 @@ public interface IRun extends Serializable {
 	public compare getCompare();
 	public void setup(State state);
 
-	public boolean getNext();
 
 }

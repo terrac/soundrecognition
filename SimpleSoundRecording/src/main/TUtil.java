@@ -71,7 +71,7 @@ public class TUtil {
 			String str = "";
 			while ((str = in.readLine()) != null) {
 				str = str.substring(1, str.length() - 1);
-				System.out.println(str);
+			//	System.out.println(str);
 				String[] sta = str.split(",");
 				List<Integer> b = new ArrayList<Integer>();
 				for (String c : sta) {
@@ -84,7 +84,7 @@ public class TUtil {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		System.out.println(a);
+		//System.out.println(a);
 		return (List<Integer>[]) a.toArray(new List[1]);
 	}
 	
@@ -93,7 +93,7 @@ public class TUtil {
 
 			String name = TUtil.getname(a);
 			TUtil.runFile(recorder, state, a, name);
-
+			System.out.println(name);
 		}
 	}
 	
