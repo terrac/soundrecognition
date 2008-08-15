@@ -1,4 +1,5 @@
 package main;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -24,8 +25,9 @@ import com.sun.imageio.plugins.png.PNGImageWriter;
 
 public class Visual extends JFrame {
 
-	private static final int h = 500;
+	private static final int h = 1100;
 	private static final int w = 700;
+
 	@Override
 	public void paint(Graphics g) {
 		// TODO Auto-generated method stub
@@ -34,7 +36,6 @@ public class Visual extends JFrame {
 		g.fillRect(0, 0, w, h);
 		Graphics2D g2 = (Graphics2D) g;
 
-	
 		for (linecolor a : linecols) {
 			g2.setColor(a.col);
 			for (int i = 0; i < a.lines.size(); i++) {
@@ -47,21 +48,28 @@ public class Visual extends JFrame {
 		}
 		g2.setColor(Color.white);
 		int b = 0;
-		for(String a : textOutput){
-		g2.drawString(a, w-200, 250+b);
-		b += 20;
+		int e = 0;
+		for (String a : textOutput) {
+			g2.drawString(a, e, 250 + b);
+			b += 20;
+			if(b == 500){
+				e+= 130;
+				b = 0;
+			}
 		}
 	}
 
 	public List<String> textOutput = new ArrayList<String>();
+
 	public void save(String name) {
-		BufferedImage awtImage = new BufferedImage(getWidth(),getHeight(),BufferedImage.TYPE_INT_RGB);
-			
-		 Graphics g = awtImage.getGraphics();
-		 paint(g);
-		 	
-		 try {
-			ImageIO.write(awtImage, "PNG", new File("pics\\"+name+".png"));
+		BufferedImage awtImage = new BufferedImage(getWidth(), getHeight(),
+				BufferedImage.TYPE_INT_RGB);
+
+		Graphics g = awtImage.getGraphics();
+		paint(g);
+
+		try {
+			ImageIO.write(awtImage, "PNG", new File("pics\\" + name + ".png"));
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -78,23 +86,18 @@ public class Visual extends JFrame {
 		// v.setPreferredSize(new Dimension(50,50));
 		setSize(w, h);
 		show();
-		 addWindowListener(new WindowAdapter() {
-			 public void windowClosing(WindowEvent e) {
-				 save("piconexit");
+		addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				save("piconexit");
 
-
-			 }
-			 });
+			}
+		});
 	}
 
 	public static void main(String[] args) {
 		Visual v = new Visual();
 		v.setForeground(Color.black);
 
-
-
 	}
-
-
 
 }

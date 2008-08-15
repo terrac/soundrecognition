@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import main.TUtil;
 
@@ -12,10 +13,11 @@ import com.sun.xml.internal.ws.api.addressing.AddressingVersion;
 
 import sun.security.x509.AVA;
 import util.Average;
+import util.Highest;
 
 import PatternMatch.*;
 
-public class compareDots extends compare {
+public class compareDotsTop extends compare {
 
 	Map<Integer, Map<String, Average>> hMap = new HashMap();
 
@@ -54,7 +56,18 @@ public class compareDots extends compare {
 
 			}
 		} else {
-
+			for(Map<String, Average> a: hMap.values()){
+				Highest b = new Highest();
+				for (Entry<String, Average> c:a.entrySet()) {
+					b.calPassed((int) c.getValue().getAverage(), c);;
+				}
+				a.clear();
+				Entry<String,Average> c = (Entry) b.c;
+				if(c == null){
+					continue;
+				}
+				a.put(c.getKey(),c.getValue());
+			}
 			for (Integer a : aMap.keySet()) {
 				if (!hMap.containsKey(a)) {
 					hMap.put(a, new HashMap());

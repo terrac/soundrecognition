@@ -20,6 +20,15 @@ public class Highest {
 		count = 0;
 
 	}
+	public Object c;
+	public void calPassed(int a, Object b) {
+		if(a > hcount){
+			hcount = a;
+			c = b;
+		}
+		count = 0;
+
+	}
 	public void increment(){
 		count++;
 	}

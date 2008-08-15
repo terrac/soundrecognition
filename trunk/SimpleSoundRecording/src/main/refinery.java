@@ -5,7 +5,6 @@ import java.awt.geom.Line2D;
 import java.util.ArrayList;
 import java.util.List;
 
-import old.dir;
 
 
 import PatternMatch.SoundBit;

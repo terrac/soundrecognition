@@ -7,6 +7,7 @@ import java.util.List;
 
 import run.LengthBetweenSizeAvgCompDotsRun;
 
+import PatternMatch.Block;
 import PatternMatch.BlockCompare;
 import PatternMatch.SoundBit;
 import PatternMatch.ITuple;
@@ -65,5 +66,15 @@ public abstract class compare implements Serializable {
 	public void reset() {
 		throw new RuntimeException("no reset");
 	}
-
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return name;
+	}
+	public boolean getNext(){
+		return false;
+	}
+	public void setup(){
+		
+	}
 }

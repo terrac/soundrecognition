@@ -8,9 +8,9 @@ import java.util.List;
 public class Block implements Serializable{
 	public int z;
 	public int y;
-	public boolean execute(List<SoundBit> a, BlockCompare z) {
-		
-		return false;
+	
+	public boolean execute(List<SoundBit> a, BlockCompare z, int highest) {
+		throw new RuntimeException("wut");		
 	}
 	@Override
 	public String toString() {
