@@ -1,0 +1,1 @@
+I managed to make 1 and 2 distinguished most of the time.  Hurray!!

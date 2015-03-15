@@ -1,0 +1,1 @@
+This is a sound recognition framework with a system for easily creating comparison objects to recognize sound.
